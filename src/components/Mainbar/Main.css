@@ -1,0 +1,328 @@
+.main{
+    flex: 1;
+    min-height: 100vh;
+    padding-bottom: 15vh;
+    position: relative;
+    background-color: #f4f4f4; /* Light background color for the main area */
+    flex-direction: column; /* Stack children vertically */
+    display: flex; /* Use flexbox for layout */
+}
+/* Main.css */
+
+.main {
+    flex: 1; /* Allow the main section to grow and fill available space */
+    background-color: #f4f4f4; /* Light background color for the main area */
+    padding: 20px; /* Padding around the main content */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+}
+
+.navbar {
+    display: flex; /* Use flexbox for navbar layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+    background-color: #2c3e50; /* Dark background color for navbar */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for navbar */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+.navbar p {
+    font-size: 24px; /* Font size for the title */
+    font-weight: bold; /* Bold text */
+    margin: 0; /* Remove default margin */
+}
+
+.navbar img {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Adjust size as needed */
+    border-radius: 50%; /* Make the user icon circular */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar img:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.navbar:hover {
+    background-color: rgba(44, 62, 80, 1); /* Darken background on hover */
+}
+
+.navbar p {
+    font-size: 26px; /* Font size for the title */
+    font-weight: bold; /* Bold text */
+    margin: 0; /* Remove default margin */
+    letter-spacing: 1px; /* Slightly increase letter spacing */
+}
+
+.navbar img {
+    width: 35px; /* Adjust size as needed */
+    height: 35px; /* Adjust size as needed */
+    border-radius: 50%; /* Make the user icon circular */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar img:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+}
+
+.main-container {
+    margin-top: 20px; /* Space between navbar and main content */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    /* max-width: 900; */
+    margin: auto;
+    /* margin-left: 10px; */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+}
+
+.greet {
+    margin-bottom: 20px; /* Space below greeting section */
+    color: #2c3e50; /* Dark text color */
+    margin: 50px 0px;
+    font-size: 56px;
+    font-weight: 500;
+    padding: 30px; /* Padding around greeting text */
+    /* width: 100%; /* Full width */
+    /* height: 100%; */ 
+}
+
+.greet p {
+    margin: 0; /* Remove default margin */
+    font-size: 20px; /* Font size for greeting */
+    font-size: 56px;
+    font-weight: 500;
+    
+}
+
+.greet span {
+    font-weight: bold; /* Bold text for the name */
+    font-size: 24px; /* Larger font size for emphasis */
+    background: -webkit-linear-gradient(16deg, #4b90ff, #ff5546); /* Gradient background */
+    -webkit-background-clip: text; /* Clip background to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+    font-size: 56px;
+    font-weight: 500;
+}
+
+.cards {
+    display: grid; /* Use grid layout for cards */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Responsive grid */
+    gap: 15px; /* Space between cards */
+    padding: 20px; /* Padding around cards */
+}
+
+.card {
+    height: 200px; /* Fixed height for cards */
+    background-color: white; /* White background for cards */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px; /* Padding inside cards */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    display: flex; /* Use flexbox for card layout */
+    align-items: center; /* Center items vertically */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+    cursor: pointer;
+}
+
+
+
+.card p {
+    margin: 0; /* Remove default margin */
+    font-size: 16px; /* Font size for card text */
+    flex: 1; /* Allow text to take available space */
+    color: #2c3e50;
+}
+
+.card img {
+    width: 35px; /* Adjust size as needed */
+    /* height: 30px; Adjust size as needed */
+    /* margin-left: 10px; Space between text and icon */
+    padding: 5px;
+    position: absolute;
+    background-color: #f4f4f4;
+    border-radius: 25px; /* Make the icon circular */
+    bottom: 10px; /* Position at the bottom of the card */
+    right:10px ;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    background-color: #9b9fa2;
+    color: white; /* Change text color on hover */
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+.main-bottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 15vh; /* Height of the bottom section */
+    background-color: #2c3e50; /* Dark background color for the bottom section */
+    color: white; /* Text color */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    font-size: 16px; /* Font size for text */
+    font-weight: bold; /* Bold text */
+}
+.search-box{
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    background-color: #fff; /* White background for search box */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding inside search box */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    margin-bottom: 20px; /* Space below search box */
+}
+.search-box img{
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+    margin-right: 10px; /* Space between icon and input */
+}
+.search-box input{
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline on focus */
+    flex: 1; /* Allow input to take available space */
+    font-size: 16px; /* Font size for input text */
+    color: #2c3e50; /* Dark text color */
+}
+.search-box div{
+    background-color: #2c3e50; /* Dark background color for search button */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for search button */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+.search-box div:hover{
+    background-color: #4b90ff; /* Change background color on hover */
+}
+
+.main .bottom-info{
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+    background-color: #2c3e50; /* Dark background color for bottom info */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for bottom info */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+.main-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background color */
+    border-top: 1px solid #e0e0e0; /* Subtle border at the top */
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Full width */
+    max-width: 600px; /* Limit the width */
+    margin-bottom: 10px; /* Space below the search box */
+}
+
+.search-box input {
+    flex: 1; /* Take up remaining space */
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    outline: none; /* Remove outline on focus */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.search-box input:focus {
+    border-color: #007bff; /* Change border color on focus */
+}
+
+.search-box img {
+    width: 24px; /* Set icon size */
+    height: 24px; /* Set icon size */
+    margin-left: 10px; /* Space between icons */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.search-box img:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.bottom-info {
+    margin-top: 10px; /* Space above the info text */
+    font-size: 14px; /* Font size */
+    color: #666; /* Gray color for the text */
+    text-align: center; /* Center the text */
+}
+
+.result{
+    padding: 0px 5%;
+    max-height: 70vh;
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.result::-webkit-scrollbar{
+    display: none; /* Hide scrollbar */
+}
+
+.result-title{
+    margin:40px 0px;
+    display: flex; /* Use flexbox for layout */
+    align-items: center;
+    gap: 10px; /* Space between items */
+}
+
+.result img{
+    width: 40px;
+    border-radius:50%;
+}
+
+.result-data{
+    display: flex;
+    align-items: start;
+    gap:20px;
+}
+
+.loader{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+
+.loader hr {
+    border-radius: 4px;
+    border: none;
+    background-color: #f6f7f8; /* Light background color for the loader bar */
+    background: linear-gradient(to right, #9ed7ff, #ffffff, #9ed7ff);
+    background-size: 800px 50px;
+    height: 20px;
+    animation: loading 6s infinite linear; /* Corrected animation name */
+}
+
+@keyframes loading {
+    0% {
+        background-position: -800px 0; /* Start position for animation */
+    }
+    100% {
+        background-position: 800px 0; /* End position for animation */
+    }
+}
+
+.result-data p {
+    font-size: 16px; /* Specify a valid font size */
+    font-weight: 300; /* Light text */
+    color: #2c3e50; /* Dark text color */
+    line-height: 1.8;
+}
