@@ -18,6 +18,11 @@ const ContextProvider=(props)=>{
             setResultData((prevResult) => prevResult + nextword); // Append the new word to the existing result
         },75*index);
     }
+
+    const newChat=()=>{
+        setLoading(false);
+        setshowResult(false);
+    }
     
     const onSent = async (prompt) => {
         setResultData ("")
@@ -80,6 +85,7 @@ const ContextProvider=(props)=>{
         resultData,
         input,
         setInput,
+        newChat
     
     };
     
