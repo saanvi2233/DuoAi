@@ -10,9 +10,10 @@ const Main = () => {
   const { input, setInput,onSent, handleSubmit, loading, showResult, resultData,recentPrompt,handleKeyDown } = useContext(Context);
 
   return (
+    
     <div className='main'>
       <div className='navbar'>
-        <p>GeminiGo</p>
+        <p>Gemini</p>
         <img src={assets.user_icon} alt='user icon' />
       </div>
       <div className="main-container">
@@ -22,23 +23,23 @@ const Main = () => {
           
         <div className="greet">
             <p><span>Hello,Sanvi</span></p>
-            <p>How can I help You Today!</p>
+            <p>How can Gemini help?</p>
         </div>
         <div className="cards">
             <div className="card">
-                <p>Suggest some beautiful places</p>
+                <p>Discover Stunning Destinations</p>
                 <img src={assets.compass_icon} alt='compass icon' />
             </div>
             <div className="card">
-                <p>Briefly summarize</p>
+                <p>Summarize Key Points Effortlessly</p>
                 <img src={assets.bulb_icon} alt='compass icon' />
             </div>
             <div className="card">
-                <p>Brainstrom team Bonding activities for our work</p>
+                <p>Generate Fun Team-Building Ideas</p>
                 <img src={assets.message_icon} alt='compass icon' />
             </div>
             <div className="card">
-                <p>Improve the readablity</p>
+                <p>Enhance Your Content's Clarity</p>
                 <img src={assets.code_icon} alt='compass icon' />
             </div>
         </div>
@@ -66,17 +67,19 @@ const Main = () => {
         }
         <div className="main-bottom">
          
-            <div className="search-box">
+        <div className="search-box">
 
-            <input onChange={(e)=>setInput(e.target.value)}  onKeyDown={handleKeyDown} value={input} type="text" placeholder='Type your message here...' />
-                <img src={assets.gallery_icon} alt="" />
-                <img src={assets.mic_icon} alt="" />
-                {/* //making send icon display only when text is there in the input box */}
-                {input?<img onClick={()=>onSent()}src={assets.send_icon} alt="" />:null}
-            </div>
-            </div>
+<input onChange={(e)=>setInput(e.target.value)}  onKeyDown={handleKeyDown} value={input} type="text" placeholder='Type your message here...' />
+    <img src={assets.gallery_icon} alt="" />
+    <img src={assets.mic_icon} alt="" />
+    {/* //making send icon display only when text is there in the input box */}
+    {input?<img onClick={()=>onSent()}src={assets.send_icon} alt="" />:null}
+</div>
+ {/* <p className='bottom-info'> Gemini may display inaccurate info,so double-check the responses </p> */}
 
-        {/* <p className='bottom-info'> Gemini may display inaccurate info,so double-check the responses </p> */}
+        </div>
+
+       
       </div>
     </div>
   )
