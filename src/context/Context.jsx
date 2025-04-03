@@ -23,12 +23,26 @@ const ContextProvider=(props)=>{
         setResultData ("")
         setLoading(true);
         setshowResult(true);
-        setRecentPrompt(input);
-        //now lets save our previous prompt in state variable
-        setPrevPrompts((prevPrompts) => [...prevPrompts, input]);
-        const response=await runChat(input);
+
+        //for displaying prompt upon clicking in the recent entry
+        let response;
+        if(prompt!==undefined){
+            response=await runChat(prompt);
+            setRecentPrompt(prompt);
+        }
+        else{
+            setPrevPrompts((prevPrompts) => [...prevPrompts, input]);
+            setRecentPrompt(input);
+            response=await runChat(input);
+
+        }
+
+        // setRecentPrompt(input);
+        // //now lets save our previous prompt in state variable
+        // setPrevPrompts((prevPrompts) => [...prevPrompts, input]);
+        // const response=await runChat(input);
         let responseArr=response.split("**"); // this is to convert the text into bold 
-        let newResponse="";
+        let newResponse="   ";
       
         for(let i=0;i<responseArr.length;i++){
         if(i===0 || i%2!=1){

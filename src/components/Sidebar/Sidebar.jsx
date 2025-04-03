@@ -9,6 +9,12 @@ const Sidebar = () => {
 const[extended,setExtended] = React.useState(false);
 const{onSent,prevPrompts,setRecentPrompt}=React.useContext(Context);
 
+const loadPrompt=async (prompt)=>{
+  setRecentPrompt(prompt);
+  await onSent(prompt);
+  
+}
+
   return (
     <div className='sidebar'>
       <div className='top'>
@@ -26,7 +32,8 @@ const{onSent,prevPrompts,setRecentPrompt}=React.useContext(Context);
           {
   prevPrompts.map((item, index) => {
     return (
-      <div className="history-entry" key={index}> {/* Add a unique key prop here */}
+      <div   onClick={()=>loadPrompt(item)} // Add onClick handler to load the prompt
+       className="history-entry" key={index}> {/* Add a unique key prop here */}
         <img src={assets.message_icon} alt='message icon' />
         <p>{item.slice(0, 20)} ...</p>
       </div>
