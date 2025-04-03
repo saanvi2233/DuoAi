@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState ,useRef} from "react";
 import runChat from "../config/gemini"; // Ensure this is the correct path
 import React from "react";
 
@@ -12,6 +12,9 @@ const ContextProvider=(props)=>{
     const[loading,setLoading]=React.useState(false); 
     const[resultData,setResultData]=React.useState("");
 
+ 
+ 
+  
     const delayPara=(index,nextword)=>{
         //for making typing effect
         setTimeout(function(){
@@ -31,6 +34,15 @@ const ContextProvider=(props)=>{
             onSent();
         }
     }
+
+    //card click
+    const handleCardClick = (query) => {
+        setInput(query); // Optional: Show selected text in input field
+        setPrevPrompts((prevPrompts) => [...prevPrompts, query]); // Add to history
+        onSent(query); // Trigger search with card text
+    };
+    
+    
     
 
     const onSent = async (prompt) => {
@@ -90,12 +102,17 @@ const ContextProvider=(props)=>{
         setRecentPrompt,
         recentPrompt,
         showResult,
+        setshowResult,
         loading,
         resultData,
+        setResultData,
         input,
         setInput,
         newChat,
-        handleKeyDown
+        handleKeyDown,
+        handleCardClick
+      
+        
     
     };
     

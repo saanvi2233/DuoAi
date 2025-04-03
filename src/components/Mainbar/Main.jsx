@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useRef, useState } from 'react'
 import './Main.css'
 import { assets } from '../../assets/assets'
 import { Context } from '../../context/context' // Ensure this is the correct path to your context file
@@ -6,9 +6,14 @@ import { Context } from '../../context/context' // Ensure this is the correct pa
 
 const Main = () => {
 
-        
-  const { input, setInput,onSent, handleSubmit, loading, showResult, resultData,recentPrompt,handleKeyDown } = useContext(Context);
+  
+  const { input, setInput,onSent, handleSubmit, loading, showResult, resultData,recentPrompt,handleKeyDown,
+    handleCardClick
+   
+    
+   } = useContext(Context);
 
+  
   return (
     
     <div className='main'>
@@ -26,19 +31,27 @@ const Main = () => {
             <p>How can Gemini help?</p>
         </div>
         <div className="cards">
-            <div className="card">
+            <div className="card" onClick={
+              ()=>handleCardClick("Discover Stunning Destinations")
+            }>
                 <p>Discover Stunning Destinations</p>
                 <img src={assets.compass_icon} alt='compass icon' />
             </div>
-            <div className="card">
+            <div className="card" onClick={
+              ()=>handleCardClick("DSummarize Key Points Effortlessly")
+            }>
                 <p>Summarize Key Points Effortlessly</p>
                 <img src={assets.bulb_icon} alt='compass icon' />
             </div>
-            <div className="card">
+            <div className="card"  onClick={
+              ()=>handleCardClick("Generate Fun Team-Building Ideas")
+            }>
                 <p>Generate Fun Team-Building Ideas</p>
                 <img src={assets.message_icon} alt='compass icon' />
             </div>
-            <div className="card">
+            <div className="card" onClick={
+              ()=>handleCardClick("Enhance Your Content's Clarit")
+            } >
                 <p>Enhance Your Content's Clarity</p>
                 <img src={assets.code_icon} alt='compass icon' />
             </div>
@@ -70,7 +83,9 @@ const Main = () => {
         <div className="search-box">
 
 <input onChange={(e)=>setInput(e.target.value)}  onKeyDown={handleKeyDown} value={input} type="text" placeholder='Type your message here...' />
-    <img src={assets.gallery_icon} alt="" />
+
+          
+    <img src={assets.gallery_icon} alt=""   />
     <img src={assets.mic_icon} alt="" />
     {/* //making send icon display only when text is there in the input box */}
     {input?<img onClick={()=>onSent()}src={assets.send_icon} alt="" />:null}
