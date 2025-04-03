@@ -13,7 +13,10 @@ const ContextProvider=(props)=>{
     const[resultData,setResultData]=React.useState("");
 
     const delayPara=(index,nextword)=>{
-
+        //for making typing effect
+        setTimeout(function(){
+            setResultData((prevResult) => prevResult + nextword); // Append the new word to the existing result
+        },75*index);
     }
     
     const onSent = async (prompt) => {
@@ -22,7 +25,7 @@ const ContextProvider=(props)=>{
         setshowResult(true);
         setRecentPrompt(input);
         const response=await runChat(input);
-        let responseArr=response.split("**");
+        let responseArr=response.split("**"); // this is to convert the text into bold 
         let newResponse;
       
         for(let i=0;i<responseArr.length;i++){
@@ -32,7 +35,17 @@ const ContextProvider=(props)=>{
         else{
             newResponse+="<b>"+responseArr[i]+"</b>";
         }      }
-        setResultData(newResponse);
+
+
+        let newResponse2=newResponse.split("*").join("<br>"); //so that line can be shifted in next line
+        // setResultData(newResponse2);
+        
+        let newResponseArray=newResponse2.split(" "); //so that line can be shifted in next line
+        for(let i=0;i<newResponseArray.length;i++){
+            const nextWord=newResponseArray[i];
+            delayPara(i,nextWord+" ");
+        }
+        
         setLoading(false);
         setInput("");
     };
