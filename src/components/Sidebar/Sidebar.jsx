@@ -1,10 +1,13 @@
 import React from 'react';
 import './Sidebar.css';
 import { assets } from '../../assets/assets';
+import { Context } from '../../context/context';
+
+
 
 const Sidebar = () => {
 const[extended,setExtended] = React.useState(false);
-
+const{onSent,prevPrompts,setRecentPrompt}=React.useContext(Context);
 
   return (
     <div className='sidebar'>
@@ -19,10 +22,21 @@ const[extended,setExtended] = React.useState(false);
             extended
         ?<div className='history'>
           <p className='history_text'>History</p>
-          <div className='history-entry'>
+
+          {
+  prevPrompts.map((item, index) => {
+    return (
+      <div className="history-entry" key={index}> {/* Add a unique key prop here */}
+        <img src={assets.message_icon} alt='message icon' />
+        <p>{item.slice(0, 20)} ...</p>
+      </div>
+    );
+  })
+}
+          {/* <div className='history-entry'>
             <img src={assets.message_icon} alt='message icon' />
             <p>What is react ...</p> 
-          </div>
+          </div> */}
         </div>
          
       :null}

@@ -24,9 +24,11 @@ const ContextProvider=(props)=>{
         setLoading(true);
         setshowResult(true);
         setRecentPrompt(input);
+        //now lets save our previous prompt in state variable
+        setPrevPrompts((prevPrompts) => [...prevPrompts, input]);
         const response=await runChat(input);
         let responseArr=response.split("**"); // this is to convert the text into bold 
-        let newResponse;
+        let newResponse="";
       
         for(let i=0;i<responseArr.length;i++){
         if(i===0 || i%2!=1){
@@ -39,7 +41,7 @@ const ContextProvider=(props)=>{
 
         let newResponse2=newResponse.split("*").join("<br>"); //so that line can be shifted in next line
         // setResultData(newResponse2);
-        
+
         let newResponseArray=newResponse2.split(" "); //so that line can be shifted in next line
         for(let i=0;i<newResponseArray.length;i++){
             const nextWord=newResponseArray[i];
