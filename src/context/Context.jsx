@@ -24,6 +24,15 @@ const ContextProvider=(props)=>{
         setshowResult(false);
     }
     
+    //making eneter functionality
+    const handleKeyDown=(event)=>{
+        if(event.key==="Enter"){
+            event.preventDefault();
+            onSent();
+        }
+    }
+    
+
     const onSent = async (prompt) => {
         setResultData ("")
         setLoading(true);
@@ -85,7 +94,8 @@ const ContextProvider=(props)=>{
         resultData,
         input,
         setInput,
-        newChat
+        newChat,
+        handleKeyDown
     
     };
     

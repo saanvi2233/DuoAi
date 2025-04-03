@@ -6,7 +6,8 @@ import { Context } from '../../context/context' // Ensure this is the correct pa
 
 const Main = () => {
 
-  const { input, setInput,onSent, handleSubmit, loading, showResult, resultData,recentPrompt } = useContext(Context);
+        
+  const { input, setInput,onSent, handleSubmit, loading, showResult, resultData,recentPrompt,handleKeyDown } = useContext(Context);
 
   return (
     <div className='main'>
@@ -67,10 +68,11 @@ const Main = () => {
          
             <div className="search-box">
 
-            <input onChange={(e)=>setInput(e.target.value)} value={input} type="text" placeholder='Type your message here...' />
+            <input onChange={(e)=>setInput(e.target.value)}  onKeyDown={handleKeyDown} value={input} type="text" placeholder='Type your message here...' />
                 <img src={assets.gallery_icon} alt="" />
                 <img src={assets.mic_icon} alt="" />
-                <img onClick={()=>onSent()}src={assets.send_icon} alt="" />
+                {/* //making send icon display only when text is there in the input box */}
+                {input?<img onClick={()=>onSent()}src={assets.send_icon} alt="" />:null}
             </div>
             </div>
 
