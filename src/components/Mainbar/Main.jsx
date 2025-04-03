@@ -1,19 +1,53 @@
-import React, { useContext,useRef, useState } from 'react'
+import React, { useContext,useRef, useState ,useEffect} from 'react'
 import './Main.css'
 import { assets } from '../../assets/assets'
 import { Context } from '../../context/context' // Ensure this is the correct path to your context file
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 
 
 const Main = () => {
 
   
   const { input, setInput,onSent, handleSubmit, loading, showResult, resultData,recentPrompt,handleKeyDown,
-    handleCardClick
+    handleCardClick,
    
     
    } = useContext(Context);
 
-  
+    // Speech Recognition Hook
+    const { transcript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
+
+
+    // Toggle Listening State
+  const handleMicClick = () => {
+    if (listening) {
+      SpeechRecognition.stopListening();
+    } else {
+      SpeechRecognition.startListening({ continuous: true });
+    }
+  };
+
+  // Sync transcript with input field
+  useEffect(() => {
+    if (transcript) {
+      setInput(transcript);
+      console.log(transcript);
+    }
+  }, [transcript, setInput]);
+
+  // Handle sending input
+  const handleSend = () => {
+    if (input.trim()) {
+      onSent(input); // Send the input
+      setInput(''); // Clear the input field
+      SpeechRecognition.stopListening(); // Stop the mic
+    }
+  };
+
+  if (!browserSupportsSpeechRecognition) {
+    return <p>Your browser does not support speech recognition.</p>;
+  }
+
   return (
     
     <div className='main'>
@@ -83,12 +117,19 @@ const Main = () => {
         <div className="search-box">
 
 <input onChange={(e)=>setInput(e.target.value)}  onKeyDown={handleKeyDown} value={input} type="text" placeholder='Type your message here...' />
-
+{/* <p className='transcript'>{transcript}</p> */}
           
-    <img src={assets.gallery_icon} alt=""   />
-    <img src={assets.mic_icon} alt="" />
-    {/* //making send icon display only when text is there in the input box */}
-    {input?<img onClick={()=>onSent()}src={assets.send_icon} alt="" />:null}
+    <img src={assets.gallery_icon} alt="" />
+    <img 
+              src={assets.mic_icon} 
+              alt="Mic Icon" 
+              onClick={handleMicClick} 
+              style={{ backgroundColor: listening ? "#ffcccc" : "transparent", borderRadius: "50%" }} 
+            />    {/* //making send icon display only when text is there in the input box */}
+    {input?<img onClick={() => {
+      onSent();      // Existing function
+      SpeechRecognition.stopListening(); // Stop mic after sending
+    }} src={assets.send_icon} alt="" />:null}
 </div>
  {/* <p className='bottom-info'> Gemini may display inaccurate info,so double-check the responses </p> */}
 

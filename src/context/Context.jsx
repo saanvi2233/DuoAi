@@ -2,6 +2,7 @@ import { createContext, useState ,useRef} from "react";
 import runChat from "../config/gemini"; // Ensure this is the correct path
 import React from "react";
 
+
 export const Context = createContext();
 
 const ContextProvider=(props)=>{
@@ -12,7 +13,8 @@ const ContextProvider=(props)=>{
     const[loading,setLoading]=React.useState(false); 
     const[resultData,setResultData]=React.useState("");
 
- 
+ //for speech recognition
+ //transcript app jo bologe y eh vahi dedega
  
   
     const delayPara=(index,nextword)=>{
@@ -41,6 +43,11 @@ const ContextProvider=(props)=>{
         setPrevPrompts((prevPrompts) => [...prevPrompts, query]); // Add to history
         onSent(query); // Trigger search with card text
     };
+
+    
+    //mic
+    const handleVoiceInput = () => {
+    }
     
     
     
@@ -110,7 +117,8 @@ const ContextProvider=(props)=>{
         setInput,
         newChat,
         handleKeyDown,
-        handleCardClick
+        handleCardClick,
+        // handleVoiceInput
       
         
     
