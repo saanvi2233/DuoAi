@@ -326,3 +326,22 @@
     color: #2c3e50; /* Dark text color */
     line-height: 1.8;
 }
+
+@media(max-width: 600px){
+.main-bottom input{
+    flex: none;
+    width: 150px;
+}
+
+.main-bottom img{
+    width: 20px; /* Adjust size as needed */
+    
+}
+.search-box{
+    padding: 5px 10px;;
+}
+.search-box div{
+    gap: 5px;
+}
+
+}

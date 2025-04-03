@@ -55,6 +55,7 @@
 .sidebar .history {
     margin-top: 30px; /* Space above history section */
     margin-bottom: 20px;
+    animation:fadeIn 1.5s; /* Fade-in animation */
 }
 
 .history_text {
@@ -135,4 +136,22 @@
     .bottom-item-recent-entry {
         margin: 15px 0; /* Adjust margin for smaller screens */
     }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+       display: none;
+    }
+
+    /* .history_text {
+        font-size: 16px; /
+    }
+
+    .sidebar .new_chat {
+        font-size: 10px; 
+    }
+
+    .bottom-item-recent-entry {
+        margin: 10px 0; 
+    } */
 }
