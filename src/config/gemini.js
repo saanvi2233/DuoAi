@@ -11,11 +11,11 @@ const API_KEY = "AIzaSyDZgi9KZjqkfsus_lKSNE3Wcc8a6G3oH5I"; // Replace with your 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Define the model name
-const TEXT_MODEL_NAME = "gemini-2.5-pro-exp-03-25";
+const MODEL_NAME = "gemini-2.5-pro-exp-03-25";
 const IMAGE_MODEL_NAME = "gemini-2.0-flash-exp-image-generation";
 
 // Define generation configuration for text
-const textGenerationConfig = {
+const generationConfig = {
     temperature: 1,
     topP: 0.95,
     topK: 64,

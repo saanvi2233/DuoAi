@@ -28,7 +28,7 @@ const loadPrompt=async (prompt)=>{
         {
             extended
         ?<div className='history'>
-          <p className='history_text'>History</p>
+          <p className='history_text'>Chat History</p>
 
           {
   prevPrompts.map((item, index) => {
@@ -36,7 +36,9 @@ const loadPrompt=async (prompt)=>{
       <div   onClick={()=>loadPrompt(item)} // Add onClick handler to load the prompt
        className="history-entry" key={index}> {/* Add a unique key prop here */}
         <img src={assets.message_icon} alt='message icon' />
-        <p>{item.slice(0, 20)} ...</p>
+        {/* <p>{item.slice(0, 20)} ...</p> */}
+        <p>{item.length > 20 ? `${item.slice(0, 20)}...` : item}</p>
+
       </div>
     );
   })

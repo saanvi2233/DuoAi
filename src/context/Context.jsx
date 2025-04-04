@@ -36,7 +36,9 @@ const ContextProvider=(props)=>{
     const handleKeyDown=(event)=>{
         if(event.key==="Enter"){
             event.preventDefault();
-            onSent();
+            onSent(); // Function to send the text
+            setInput(''); // Clear input after sending
+            SpeechRecognition.stopListening();
         }
     }
 

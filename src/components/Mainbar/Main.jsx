@@ -58,21 +58,7 @@ const [imageReady, setImageReady] = useState(false);      // controls delay
     fileInputRef.current.click();
   };
 
-  // const handleFileChange = async (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     setSelectedImage(file); // Store the file for later use
-  //     const reader=new FileReader();
-  //     reader.onloadend = () => {
-  //       setImagePreview(reader.result);
-  //       // setImageReady(true);
-  //     };
-  //     reader.readAsDataURL(file);
-     
-  //     await handleFileUpload(file);
-  //     setImageUploaded(true); // trigger send icon display
-  //   }
-  // };
+ 
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -102,7 +88,7 @@ const [imageReady, setImageReady] = useState(false);      // controls delay
     
     <div className='main'>
       <div className='navbar'>
-        <p>Gemini</p>
+        <p>DuoAi</p>
         <img src={assets.user_icon} alt='user icon' />
       </div>
       <div className="main-container">
@@ -112,31 +98,31 @@ const [imageReady, setImageReady] = useState(false);      // controls delay
           
         <div className="greet">
             <p><span>Hello,Sanvi</span></p>
-            <p>How can Gemini help?</p>
-        </div>
+            <p>DuoAi is here for you! What’s on your mind?</p>
+            </div>
         <div className="cards">
             <div className="card" onClick={
-              ()=>handleCardClick("Discover Stunning Destinations")
+              ()=>handleCardClick("Explore AI-Powered Insights")
             }>
-                <p>Discover Stunning Destinations</p>
+                <p>Explore AI-Powered Insights</p>
                 <img src={assets.compass_icon} alt='compass icon' />
             </div>
             <div className="card" onClick={
-              ()=>handleCardClick("DSummarize Key Points Effortlessly")
+              ()=>handleCardClick("Summarize Conversations Instantly")
             }>
-                <p>Summarize Key Points Effortlessly</p>
+                <p>Summarize Conversations Instantly</p>
                 <img src={assets.bulb_icon} alt='compass icon' />
             </div>
             <div className="card"  onClick={
-              ()=>handleCardClick("Generate Fun Team-Building Ideas")
+              ()=>handleCardClick("Create Engaging Team Activities")
             }>
-                <p>Generate Fun Team-Building Ideas</p>
+                <p>Create Engaging Team Activities</p>
                 <img src={assets.message_icon} alt='compass icon' />
             </div>
             <div className="card" onClick={
-              ()=>handleCardClick("Enhance Your Content's Clarit")
+              ()=>handleCardClick("Improve Your Writing Clarity")
             } >
-                <p>Enhance Your Content's Clarity</p>
+                <p>Improve Your Writing Clarity</p>
                 <img src={assets.code_icon} alt='compass icon' />
             </div>
         </div>
@@ -177,7 +163,7 @@ const [imageReady, setImageReady] = useState(false);      // controls delay
   </div>
 )}
 
-<input onChange={(e)=>setInput(e.target.value)}  onKeyDown={handleKeyDown} value={input} type="text" placeholder='Type your message here...' />
+<input onChange={(e)=>setInput(e.target.value)} onKeyDown={handleKeyDown}  value={input} type="text" placeholder='Ask DuoAi anything...' />
 {/* <p className='transcript'>{transcript}</p> */}
           
           {/* Image Upload */}
@@ -196,30 +182,32 @@ const [imageReady, setImageReady] = useState(false);      // controls delay
             />
 
         {/* Mic */}
-         <img 
+        <img 
               src={assets.mic_icon} 
               alt="Mic Icon" 
               onClick={handleMicClick} 
               style={{ backgroundColor: listening ? "#ffcccc" : "transparent", borderRadius: "50%" }} 
-            />    {/* //making send icon display only when text is there in the input box */}
-   {(input || selectedImage) && imageReady && (
+            />
+                {/* //making send icon display only when text is there in the input box */}
+                {(input.trim() || selectedImage) && (
   <img
     onClick={() => {
       if (selectedImage) {
-        handleFileUpload(selectedImage); // 🔥 send image
-        setSelectedImage(null);         // reset state
-        setImagePreview(null);
+        handleFileUpload(selectedImage); 
+        setSelectedImage(null);         
         setImageReady(false);
-      } else {
-        onSent();                        // 🔥 send text
+      } else if (input.trim()) {
+        onSent();                        
         SpeechRecognition.stopListening();
+        setInput("");                    // Clear input after sending
       }
-      setInput("");                      // Clear input always
     }}
     src={assets.send_icon}
     alt="Send"
+    style={{ cursor: 'pointer' }} // Optional: Add cursor style for better UX
   />
 )}
+
 
 </div>
  {/* <p className='bottom-info'> Gemini may display inaccurate info,so double-check the responses </p> */}
