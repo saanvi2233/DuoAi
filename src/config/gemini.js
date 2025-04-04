@@ -11,10 +11,11 @@ const API_KEY = "AIzaSyDZgi9KZjqkfsus_lKSNE3Wcc8a6G3oH5I"; // Replace with your 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Define the model name
-const MODEL_NAME = "gemini-2.5-pro-exp-03-25";
+const TEXT_MODEL_NAME = "gemini-2.5-pro-exp-03-25";
+const IMAGE_MODEL_NAME = "gemini-2.0-flash-exp-image-generation";
 
-// Define generation configuration
-const generationConfig = {
+// Define generation configuration for text
+const textGenerationConfig = {
     temperature: 1,
     topP: 0.95,
     topK: 64,
@@ -63,5 +64,44 @@ async function runChat(prompt) {
     return response.text(); // Return the response text 
 }
 
-// Export the runChat function
-export default runChat;
+
+// HELPER: Convert File to Base64
+const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result.replace(/^data:.+;base64,/, "");
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+  
+  // ✨ IMAGE-BASED PROMPT FUNCTION
+  async function generateFromImage(file, promptText = "Describe this image in detail.") {
+    try {
+      const base64Image = await convertToBase64(file);
+  
+      const model = genAI.getGenerativeModel({ model: IMAGE_MODEL_NAME });
+  
+      const result = await model.generateContent([
+        {
+          inlineData: {
+            mimeType: file.type,
+            data: base64Image,
+          },
+        },
+        {
+          text: promptText,
+        },
+      ]);
+  
+      return result.response.text();
+    } catch (error) {
+      console.error("Error generating from image:", error);
+      return "Failed to analyze the image.";
+    }
+  }
+  
+  export { runChat, generateFromImage };

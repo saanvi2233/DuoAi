@@ -1,6 +1,8 @@
 import { createContext, useState ,useRef} from "react";
-import runChat from "../config/gemini"; // Ensure this is the correct path
+import {runChat,generateFromImage} from "../config/gemini"; // Ensure this is the correct path
 import React from "react";
+
+
 
 
 export const Context = createContext();
@@ -12,6 +14,7 @@ const ContextProvider=(props)=>{
     const[showResult,setshowResult]=React.useState(false);
     const[loading,setLoading]=React.useState(false); 
     const[resultData,setResultData]=React.useState("");
+    
 
  //for speech recognition
  //transcript app jo bologe y eh vahi dedega
@@ -45,9 +48,41 @@ const ContextProvider=(props)=>{
     };
 
     
-    //mic
-    const handleVoiceInput = () => {
-    }
+  
+  
+    const handleFileUpload = async (file) => {
+        setResultData("");
+        setLoading(true);
+        setshowResult(true);
+        setRecentPrompt("Uploaded Image");
+    
+        try {
+          const text = await generateFromImage(file);
+    
+
+          // Extract a short title from the image result
+        const summary = text.split(/[.?!]/)[0].split(" ").slice(0, 6).join(" "); // First 6 words of first sentence
+        setRecentPrompt(summary); // Set as result title
+        setPrevPrompts((prev) => [...prev, summary]);
+          let formatted = text
+            .split("**")
+            .map((chunk, i) => (i % 2 === 1 ? `<b>${chunk}</b>` : chunk))
+            .join("")
+            .split("*")
+            .join("<br>");
+    
+          const words = formatted.split(" ");
+          words.forEach((word, index) => delayPara(index, word + " "));
+        } catch (error) {
+          console.error("Error processing image:", error);
+          setResultData("Error processing the image.");
+        } finally {
+          setLoading(false);
+        }
+      };
+    
+
+    
     
     
     
@@ -118,7 +153,8 @@ const ContextProvider=(props)=>{
         newChat,
         handleKeyDown,
         handleCardClick,
-        // handleVoiceInput
+        handleFileUpload,
+
       
         
     

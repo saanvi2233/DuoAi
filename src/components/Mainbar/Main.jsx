@@ -7,16 +7,23 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 
 const Main = () => {
 
-  
+  const [imageUploaded, setImageUploaded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null); // holds file
+const [imagePreview, setImagePreview] = useState(null);   // holds base64
+const [imageReady, setImageReady] = useState(false);      // controls delay
+
+
+
   const { input, setInput,onSent, handleSubmit, loading, showResult, resultData,recentPrompt,handleKeyDown,
-    handleCardClick,
+    handleCardClick,handleFileUpload
    
     
    } = useContext(Context);
+   const fileInputRef = useRef(null);
+
 
     // Speech Recognition Hook
     const { transcript, browserSupportsSpeechRecognition, listening } = useSpeechRecognition();
-
 
     // Toggle Listening State
   const handleMicClick = () => {
@@ -35,18 +42,61 @@ const Main = () => {
     }
   }, [transcript, setInput]);
 
-  // Handle sending input
   const handleSend = () => {
     if (input.trim()) {
-      onSent(input); // Send the input
-      setInput(''); // Clear the input field
-      SpeechRecognition.stopListening(); // Stop the mic
+      onSent(input);
+      setInput('');
+      SpeechRecognition.stopListening();
     }
   };
-
   if (!browserSupportsSpeechRecognition) {
     return <p>Your browser does not support speech recognition.</p>;
   }
+
+
+  const handleGalleryClick = () => {
+    fileInputRef.current.click();
+  };
+
+  // const handleFileChange = async (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     setSelectedImage(file); // Store the file for later use
+  //     const reader=new FileReader();
+  //     reader.onloadend = () => {
+  //       setImagePreview(reader.result);
+  //       // setImageReady(true);
+  //     };
+  //     reader.readAsDataURL(file);
+     
+  //     await handleFileUpload(file);
+  //     setImageUploaded(true); // trigger send icon display
+  //   }
+  // };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+  
+      // Add 2 seconds delay to simulate loading
+      setImageReady(false);
+      setTimeout(() => {
+        setImageReady(true);
+      }, 2000);
+    }
+  };
+  
+
+  const handleSendImage = () => {
+    setImageUploaded(false); // reset after displaying
+  };
+
 
   return (
     
@@ -115,21 +165,62 @@ const Main = () => {
         <div className="main-bottom">
          
         <div className="search-box">
+        {imagePreview && (
+  <div className="image-preview-container">
+    <img src={imagePreview} alt="Selected" className="preview-image" />
+    {!imageReady && (
+      <div className="uploading-spinner">
+        <div className="spinner"></div>
+        <p>Uploading...</p>
+      </div>
+    )}
+  </div>
+)}
 
 <input onChange={(e)=>setInput(e.target.value)}  onKeyDown={handleKeyDown} value={input} type="text" placeholder='Type your message here...' />
 {/* <p className='transcript'>{transcript}</p> */}
           
-    <img src={assets.gallery_icon} alt="" />
-    <img 
+          {/* Image Upload */}
+          <img
+              src={assets.gallery_icon}
+              alt="Gallery Icon"
+              onClick={handleGalleryClick}
+              style={{ cursor: 'pointer' }}
+            />
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+
+        {/* Mic */}
+         <img 
               src={assets.mic_icon} 
               alt="Mic Icon" 
               onClick={handleMicClick} 
               style={{ backgroundColor: listening ? "#ffcccc" : "transparent", borderRadius: "50%" }} 
             />    {/* //making send icon display only when text is there in the input box */}
-    {input?<img onClick={() => {
-      onSent();      // Existing function
-      SpeechRecognition.stopListening(); // Stop mic after sending
-    }} src={assets.send_icon} alt="" />:null}
+   {(input || selectedImage) && imageReady && (
+  <img
+    onClick={() => {
+      if (selectedImage) {
+        handleFileUpload(selectedImage); // 🔥 send image
+        setSelectedImage(null);         // reset state
+        setImagePreview(null);
+        setImageReady(false);
+      } else {
+        onSent();                        // 🔥 send text
+        SpeechRecognition.stopListening();
+      }
+      setInput("");                      // Clear input always
+    }}
+    src={assets.send_icon}
+    alt="Send"
+  />
+)}
+
 </div>
  {/* <p className='bottom-info'> Gemini may display inaccurate info,so double-check the responses </p> */}
 

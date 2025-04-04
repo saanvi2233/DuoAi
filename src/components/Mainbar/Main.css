@@ -267,16 +267,18 @@
     outline: none; /* Remove outline on focus */
     transition: border-color 0.3s; /* Smooth transition for border color */
 }
-.search-box div {
-    background-color: #5865f2;
+.search-box div {background-color: #23272a;
     color: white;
     /* padding; */
-    border-radius: 8px;
+    /* border-radius: 25px; */
+    border: 1px solid #ccc;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
+    height: 43px;
 }
 .search-box div:hover {
-    background-color: #3d3e4b;
+    background-color: #747477;
 }
 
 
@@ -386,3 +388,53 @@
 }
 
 }
+
+
+.image-preview-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+   background-color: rgb(63, 62, 62);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #333;
+  }
+  
+  .preview-image {
+    
+   
+    border-radius: 10px;
+    max-width: 100px;
+    object-fit: cover;
+    background-color: #b5babd;
+  }
+  
+  .uploading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 10px;
+    height: 43px;
+  }
+  
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #555;
+    border-top: 3px solid #d1d9da;
+    border-radius: 100%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 4px;
+    margin-top: 10px;
+    height: 43px;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
