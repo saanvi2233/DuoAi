@@ -2,7 +2,7 @@
 import React from "react";
 import Sidebar from "./components/Sidebar/Sidebar.jsx";
 import Main from "./components/Mainbar/Main.jsx";
-import PassportWidget from './components/PassportWidget';
+import PassportWidget from './components/PassportWidget.jsx';
 
 function App() {
   return (
