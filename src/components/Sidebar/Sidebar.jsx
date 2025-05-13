@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
 import { assets } from '../../assets/assets';
-import { Context } from '../../context/context';
+import { Context } from '../../context/Context';
 
 
 
